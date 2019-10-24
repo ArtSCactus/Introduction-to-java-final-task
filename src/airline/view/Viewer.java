@@ -4,6 +4,7 @@ import airline.entity.components.Engine;
 import airline.entity.planes.Plane;
 import airline.exceptions.FileParsingException;
 import airline.util.Controller;
+import airline.util.SearchEngine;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

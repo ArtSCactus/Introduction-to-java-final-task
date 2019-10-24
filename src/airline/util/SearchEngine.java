@@ -1,4 +1,4 @@
-package airline.view;
+package airline.util;
 
 import airline.entity.planes.Plane;
 import org.apache.logging.log4j.LogManager;
@@ -12,13 +12,13 @@ public class SearchEngine {
     private static final Logger LOGGER = LogManager.getLogger(SearchEngine.class);
 
     /**
-     * Prints all planes with given model name.
+     * Returns list of planes with matched model name.
      *
      * @param modelName (String) type row with model name
-     * @return {@code List<Plane> foundedPLanes}
-     * @exception  NullPointerException if planes or modelName are null
+     * @return {@code List<Plane> foundedPLanes as ArrayList<>()}
+     * @throws NullPointerException if planes or modelName are null
      */
-    public static List<Plane> printPlanesByModel(List<Plane> planes, String modelName) {
+    public static List<Plane> getPlanesByModel(List<Plane> planes, String modelName) {
         if (planes == null) {
             LOGGER.warn("Planes list came as null. NullPointerException has been thrown");
             throw new NullPointerException("Plane list cannot be null");
@@ -42,16 +42,17 @@ public class SearchEngine {
     }
 
     /**
-     * Prints max console planes by serial number.
+     * Returns list of matched planes.
      * <p>
-     * Prints max console planes with serial number, that placed between min and max values.
+     * Returns list of matched planes with serial number, that placed between min and max values
+     * (includes min and max).
      * If min value will be bigger than max value, values of min and max will be swapped.
      *
      * @param planes {@code List<Plane>}
      * @param min    minimal value of serial number
      * @param max    maximal value of serial number
-     * @return {@code List<Plane> foundedPLanes}
-     * @exception NullPointerException if planes are null
+     * @return {@code List<Plane> foundedPLanes as ArrayList<>()}
+     * @throws NullPointerException if planes are null
      */
     public static List<Plane> getPlanesBySerialNumber(List<Plane> planes, int min, int max) {
         if (planes == null) {
@@ -86,12 +87,14 @@ public class SearchEngine {
     }
 
     /**
-     * Prints to console plane with given fuel consumption.
+     * Returns list of planes with matched fuel consumption.
+     * <p>
+     * Returns list of matched planes with fuel consumption, that matches the given fuel consumption.
      *
-     * @param planes          {@code List<Plane>}
+     * @param planes {@code List<Plane>}
      * @param fuelConsumption (double) value of fuel consumption
-     * @return {@code List<Plane> foundedPLanes}
-     * @exception  NullPointerException if planes are null
+     * @return {@code List<Plane> foundedPLanes as ArrayList<>()}
+     * @throws NullPointerException if planes are null
      */
     public static List<Plane> getPlanesByFuelConsumption(List<Plane> planes, double fuelConsumption) {
         if (planes == null) {
@@ -119,13 +122,17 @@ public class SearchEngine {
     }
 
     /**
-     * Prints to console plane with given fuel consumption.
+     * Returns list of matched planes with matched fuel consumption.
+     * <p>
+     * Returns list of matched planes with serial number, that placed between min and max values
+     * (includes min and max).
+     * If min value will be bigger than max value, values of min and max will be swapped.
      *
      * @param planes {@code List<Plane>}
      * @param min    (double) minimal value of fuel consumption
      * @param max    (double) maximal value of fuel consumption
-     * @return {@code List<Plane> foundedPLanes}
-     * @exception NullPointerException if planes are null
+     * @return {@code List<Plane> foundedPLanes as ArrayList<>()}
+     * @throws NullPointerException if planes are null
      */
     public static List<Plane> getPlanesByFuelConsumption(List<Plane> planes, double min, double max) {
         if (planes == null) {
@@ -158,13 +165,17 @@ public class SearchEngine {
     }
 
     /**
-     * Prints to console plane with given fuel consumption.
+     * Returns list of planes with matched cargo capacity.
+     * <p>
+     * Returns list of matched planes with serial number, that placed between min and max values
+     * (includes min and max).
+     * If min value will be bigger than max value, values of min and max will be swapped.
      *
      * @param planes {@code List<Plane>}
      * @param min    (double) minimal value of cargo capacity
      * @param max    (double) maximal value of cargo capacity
-     * @return {@code List<Plane> foundedPLanes}
-     * @exception NullPointerException if planes are null
+     * @return {@code List<Plane> foundedPLanes as ArrayList<>()}
+     * @throws NullPointerException if planes are null
      */
     public static List<Plane> getPlanesByCargoCapacity(List<Plane> planes, int min, int max) {
         if (planes == null) {
@@ -197,13 +208,17 @@ public class SearchEngine {
     }
 
     /**
-     * Prints to console plane with given fuel consumption.
+     * Returns list of planes with matched passenger capacity.
+     * <p>
+     * Returns list of matched planes with serial number, that placed between min and max values
+     * (includes min and max).
+     * If min value will be bigger than max value, values of min and max will be swapped.
      *
      * @param planes {@code List<Plane>}
-     * @param min    (int) minimal value of cargo capacity
-     * @param max    (int) maximal value of cargo capacity
-     * @return {@code List<Plane> foundedPLanes}
-     * @exception NullPointerException if planes are null
+     * @param min    (int) minimal value of passenger capacity
+     * @param max    (int) maximal value of passenger capacity
+     * @return {@code List<Plane> foundedPLanes as ArrayList<>()}
+     * @throws NullPointerException if planes are null
      */
     public static List<Plane> getPlanesByPassengerCapacity(List<Plane> planes, int min, int max) {
         if (planes == null) {

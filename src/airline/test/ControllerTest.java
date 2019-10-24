@@ -8,7 +8,7 @@ import airline.entity.components.Engine;
 import airline.entity.planes.Plane;
 import airline.util.Controller;
 import airline.util.FileHandler;
-import airline.view.SearchEngine;
+import airline.util.SearchEngine;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
