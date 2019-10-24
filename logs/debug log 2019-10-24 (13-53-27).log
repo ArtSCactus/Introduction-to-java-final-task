@@ -1,0 +1,12 @@
+2019-10-24 13:53:27.281 [main] INFO airline.util.Controller - No founded plane
+2019-10-24 13:53:27.289 [main] DEBUG airline.util.FileHandler - No file found. Given file path:  src/airline/data/Test1.txt
+2019-10-24 13:53:27.289 [main] ERROR airline.util.FileHandler - No file found by given pass.
+2019-10-24 13:53:27.293 [main] ERROR airline.util.FileHandler - Failed to convert row to Plane object
+2019-10-24 13:53:27.297 [main] ERROR airline.util.FileHandler - Failed to convert row to Plane object
+2019-10-24 13:53:27.298 [main] ERROR airline.util.FileHandler - Failed to convert plane type
+2019-10-24 13:53:27.358 [main] DEBUG airline.util.FileHandler - No file found. Given file path:  src/airline/data/Test1.txt
+2019-10-24 13:53:27.364 [main] ERROR airline.util.FileHandler - No file found by given pass.
+2019-10-24 13:53:27.367 [main] ERROR airline.util.FileHandler - Failed to convert row to Plane object
+2019-10-24 13:53:27.367 [main] INFO airline.util.FileHandler - Skipped broken line
+2019-10-24 13:53:27.378 [main] DEBUG airline.util.FileHandler - A broken line was skipped. Variables status: {currentLine="Cargo|1|C-130 HERCULES|50|abc|4|GE_GE90", skipBrokenLinMode="true"}
+2019-10-24 13:53:27.379 [main] ERROR airline.util.FileHandler - Failed to convert plane type
