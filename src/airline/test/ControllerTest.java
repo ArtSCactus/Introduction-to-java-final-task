@@ -27,7 +27,7 @@ public class ControllerTest {
     private AirlineCompany sortedByModelName;
     private AirlineCompany sortedBySerialNumberAndModelName;
 
-    private boolean isCollectionsEquals(List<Plane> list1, List<Plane> list2) {
+    private boolean areCollectionsEquals(List<Plane> list1, List<Plane> list2) {
         for (int index = 0; index < list1.size() & index < list2.size(); index++) {
             if (!list1.get(index).equals(list2.get(index))) {
                 return false;
@@ -107,31 +107,31 @@ public class ControllerTest {
     @Test
     public void sortPlanesList_DEFAULT() {
         simpleTest.sortPlanesList();
-        Assert.assertTrue(isCollectionsEquals(sortedBySerialNumber.getPlanesList(), simpleTest.getPlanesList()));
+        Assert.assertTrue(areCollectionsEquals(sortedBySerialNumber.getPlanesList(), simpleTest.getPlanesList()));
     }
 
     @Test
     public void sortPlanesList_BY_CARGO_CAPACITY() {
         simpleTest.sortPlanesList(CompareType.BY_CARGO_CAPACITY);
-        Assert.assertTrue(isCollectionsEquals(sortedByCargoCapacity.getPlanesList(), simpleTest.getPlanesList()));
+        Assert.assertTrue(areCollectionsEquals(sortedByCargoCapacity.getPlanesList(), simpleTest.getPlanesList()));
     }
 
     @Test
     public void sortPlanesList_BY_PASSENGER_CAPACITY() {
         simpleTest.sortPlanesList(CompareType.BY_PASSENGER_CAPACITY);
-        Assert.assertTrue(isCollectionsEquals(sortedByPassengerCapacity.getPlanesList(), simpleTest.getPlanesList()));
+        Assert.assertTrue(areCollectionsEquals(sortedByPassengerCapacity.getPlanesList(), simpleTest.getPlanesList()));
     }
 
     @Test
     public void sortPlanesList_BY_MODEL_NAME() {
         simpleTest.sortPlanesList(CompareType.BY_MODEL_NAME);
-        Assert.assertTrue(isCollectionsEquals(sortedByModelName.getPlanesList(), simpleTest.getPlanesList()));
+        Assert.assertTrue(areCollectionsEquals(sortedByModelName.getPlanesList(), simpleTest.getPlanesList()));
     }
 
     @Test
     public void sortPlanesList_BY_SERIAL_NUMBER_AND_MODEL_NAME() {
         simpleTest.sortPlanesList(CompareType.BY_SERIAL_NUM_AND_MODEL);
-        Assert.assertTrue(isCollectionsEquals(sortedBySerialNumberAndModelName.getPlanesList(), simpleTest.getPlanesList()));
+        Assert.assertTrue(areCollectionsEquals(sortedBySerialNumberAndModelName.getPlanesList(), simpleTest.getPlanesList()));
     }
 
     @Test
@@ -213,7 +213,7 @@ public class ControllerTest {
         List<Plane> testingValue = SearchEngine.getPlanesBySerialNumber(sortedBySerialNumber.getPlanesList(), 1,1);
         List<Plane> answer = new ArrayList<>();
         answer.add(simpleTest.getPlane(1));// 1 - array list index
-        Assert.assertTrue(isCollectionsEquals(testingValue, answer));
+        Assert.assertTrue(areCollectionsEquals(testingValue, answer));
     }
 
     @Test
@@ -222,7 +222,7 @@ public class ControllerTest {
                 simpleTest.getPlane(0).getFuelConsumption());// 0 - array list index
         List<Plane> answer = new ArrayList<>();
         answer.add(simpleTest.getPlane(0)); // 0 - array list index
-        Assert.assertTrue(isCollectionsEquals(testingValue, answer));
+        Assert.assertTrue(areCollectionsEquals(testingValue, answer));
     }
 
     @Test
@@ -231,7 +231,7 @@ public class ControllerTest {
                 0.40, 0.50);// 1 - array list index
         List<Plane> answer = new ArrayList<>();
         answer.add(simpleTest.getPlane(1)); // 1 - array list index
-        Assert.assertTrue(isCollectionsEquals(testingValue, answer));
+        Assert.assertTrue(areCollectionsEquals(testingValue, answer));
     }
 
     @Test
@@ -240,7 +240,7 @@ public class ControllerTest {
                 50, 50); // 50 - min, 50 - max
         List<Plane> answer = new ArrayList<>();
         answer.add(simpleTest.getPlane(1)); // 1 - array list index
-        Assert.assertTrue(isCollectionsEquals(testingValue, answer));
+        Assert.assertTrue(areCollectionsEquals(testingValue, answer));
     }
 
     @Test
@@ -249,7 +249,7 @@ public class ControllerTest {
                 270, 290); // 270 - min, 290 - max
         List<Plane> answer = new ArrayList<>();
         answer.add(simpleTest.getPlane(2)); // 2 - array list index
-        Assert.assertTrue(isCollectionsEquals(testingValue, answer));
+        Assert.assertTrue(areCollectionsEquals(testingValue, answer));
     }
 
 }
