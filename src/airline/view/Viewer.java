@@ -252,7 +252,7 @@ public class Viewer {
         return input.nextInt();
     }
     /**
-     * Reads int value from console without any validation.
+     * Reads double value from console without any validation.
      *
      * @return (double) value
      */
@@ -278,7 +278,7 @@ public class Viewer {
         }
         return number;
     }
-    /**Reads int value from console with validation on number format.
+    /**Reads double value from console with validation on number format.
      *
      * @return (double) value
      */
