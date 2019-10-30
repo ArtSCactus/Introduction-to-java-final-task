@@ -80,7 +80,7 @@ public class CargoPlane extends Plane {
                 + getModelName() + "|"
                 + passengerCapacity + "|"
                 + cargoCapacity + "|"
-                + getCrew() + "|"
+                + getCrewSize() + "|"
                 + engineModel.getCodeName();
     }
 }

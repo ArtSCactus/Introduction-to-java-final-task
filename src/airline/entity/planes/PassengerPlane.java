@@ -78,7 +78,7 @@ public class PassengerPlane extends Plane {
                 + getModelName() + "|"
                 + passengerCapacity + "|"
                 + cargoCapacity + "|"
-                + getCrew() + "|"
+                + getCrewSize() + "|"
                 + engineModel.getCodeName();
     }
 }

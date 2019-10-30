@@ -14,7 +14,8 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 
-/**User interface
+/**
+ * User interface
  * Realized through console.
  */
 public class Viewer {
@@ -27,48 +28,56 @@ public class Viewer {
      * Main menu on entrance to application.
      */
     public void run() {
-        System.out.println("Hello, welcome to our airline company." +
+        int choice;
+        while(true) {
+            System.out.println("Hello, welcome to our airline company." +
                 "\nPlease, select command:" +
                 "\n1-Create company." +
-                "\n2-Load company from txt file");
-        int choice = inputInt();
-        switch (choice) {
-            case (1):
-                createCompany();
-                inCompanyMenu();
-                break;
-            case(2):
-                String inputedRow;
-                while(true) {
-                    System.out.println("Please, enter path to file (type Exit to exit the application):");
-                    inputedRow=inputString();
-                    try {
-                        controller = new Controller(inputedRow);
-                        inCompanyMenu();
-                    } catch (FileParsingException e) {
-                        LOGGER.error(e.getCustomMessage());
-                        if (e.getCustomMessage().equals("No such file by given pass: " +inputedRow)){
-                            System.out.println("No file found by given path.");
+                "\n2-Load company from txt file" +
+                "\n0-Exit");
+            choice = inputIntWithFormatValidation();
+            switch (choice) {
+                case (1):
+                    createCompany();
+                    inCompanyMenu();
+                    break;
+                case (2):
+                    String inputedRow;
+                    while (true) {
+                        System.out.println("Please, enter path to file (type Exit to exit the application):");
+                        inputedRow = inputString();
+                        try {
+                            controller = new Controller(inputedRow);
+                            inCompanyMenu();
+                        } catch (FileParsingException e) {
+                            LOGGER.error(e.getCustomMessage());
+                            if (e.getCustomMessage().equals("No such file by given pass: " + inputedRow)) {
+                                System.out.println("No file found by given path.");
+                            }
+                        }
+                        if (inputedRow.equals("Exit")) {
+                            break;
                         }
                     }
-                    if(inputedRow.equals("Exit")){
-                        break;
-                    }
-                }
-                break;
-            default:
-                System.out.println("No such command");
+                    break;
+                case (0):
+                    System.exit(0);
+                default:
+                    System.out.println("No such command");
+            }
         }
     }
-    private void saveCompanyToFile(){
+
+    private void saveCompanyToFile() {
         String filePath;
         System.out.print("Please, enter path to file. If no path specified, " +
                 "file wll be created/overwritten by default file path" +
                 "\n==>");
-        filePath=inputString();
+        filePath = inputString();
         controller.toFile(filePath);
-        System.out.println("File successfully saved by path: "+filePath);
+        System.out.println("File successfully saved by path: " + filePath);
     }
+
     /**
      * Initializes airline company through console.
      * <p>
@@ -80,7 +89,7 @@ public class Viewer {
         System.out.print("Please, choose the company name: ");
         String companyName = inputString();
         System.out.println("Company " + companyName + " has been successfully created.");
-            controller = new Controller(companyName,true);
+        controller = new Controller(companyName, true);
     }
 
     /**
@@ -146,17 +155,18 @@ public class Viewer {
     private void inCompanyMenu() {
         int choice;
         System.out.println("You are owner of company " + controller.getCompanyName() + ".");
-        while(true) {
-        System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~" +
-                "\nPlease, choose the command: " +
+       while (true) {
+            System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~" +
+                    "\nPlease, choose the command: " +
                     "\nWhat do you want to do?" +
                     "\n1-Take a look at planes list" +
                     "\n2-Add new plane" +
                     "\n3-Change company name" +
-                    "\n4-Find plane"+
-                "\n5-Save to file"+
+                    "\n4-Find plane" +
+                    "\n5-Save to file" +
+                    "\n6-Back to main menu" +
                     "\n0-Exit");
-          choice = inputInt();
+            choice = inputIntWithFormatValidation();
             switch (choice) {
                 case (1):
                     printPlanes(controller.getPlanesList());
@@ -173,75 +183,79 @@ public class Viewer {
                 case (4):
                     searchLauncher();
                     break;
-                case(5):
+                case (5):
                     saveCompanyToFile();
                     break;
-                case(0):
+                case(6):
+                    return;
+                case (0):
                     System.exit(0);
             }
         }
     }
-    private void searchLauncher(){
-        System.out.println("Please, choose search type: "+
-                "\n1-By serial number;"+
-                "\n2-By fuel consumption"+
+
+    private void searchLauncher() {
+        System.out.println("Please, choose search type: " +
+                "\n1-By serial number;" +
+                "\n2-By fuel consumption" +
                 "\n3-By fuel consumption between min and maximum"
-        +"\n4-By cargo capacity between min and maximum"
-        +"\n5-By cargo capacity between min and maximum");
-        int choice=inputIntWithValidation(1,4); // minimum- 1, maximum - 4
-        switch(choice){
+                + "\n4-By cargo capacity between min and maximum"
+                + "\n5-By cargo capacity between min and maximum");
+        int choice = inputIntWithValidation(1, 4); // minimum- 1, maximum - 4
+        switch (choice) {
             // by serial number min and max
-            case(1):
+            case (1):
                 System.out.println("Please, input serial number (MIN and MAX)");
                 try {
                     printPlanes(SearchEngine.getPlanesBySerialNumber(controller.getPlanesList(),
                             inputIntWithFormatValidation(), inputIntWithFormatValidation()));
-                } catch(NoSuchElementException ex){
+                } catch (NoSuchElementException ex) {
                     System.out.println("No match found");
                 }
                 break;
-                // by fuel consumption single value
-            case(2):
+            // by fuel consumption single value
+            case (2):
                 System.out.println("Please, input fuel consumption");
                 try {
                     printPlanes(SearchEngine.getPlanesByFuelConsumption(controller.getPlanesList(),
                             inputDoubleWithFormatValidation()));
-                }catch (NoSuchElementException ex){
+                } catch (NoSuchElementException ex) {
                     System.out.println("No match found");
                 }
                 break;
-                // by fuel consumption min and max
-            case(3):
+            // by fuel consumption min and max
+            case (3):
                 System.out.println("Please, input minimal value and maximal value");
                 try {
                     printPlanes(SearchEngine.getPlanesByFuelConsumption(controller.getPlanesList(),
                             inputDoubleWithFormatValidation(), inputDoubleWithFormatValidation()));
-                }catch(NoSuchElementException ex){
+                } catch (NoSuchElementException ex) {
                     System.out.println("No match found");
                 }
                 break;
-                // by cargo capacity
-            case(4):
+            // by cargo capacity
+            case (4):
                 System.out.println("Please, input minimal value and maximal value");
                 try {
                     printPlanes(SearchEngine.getPlanesByCargoCapacity(controller.getPlanesList(),
                             inputIntWithFormatValidation(), inputIntWithFormatValidation()));
-                }catch (NoSuchElementException ex){
+                } catch (NoSuchElementException ex) {
                     System.out.println("No match found");
                 }
                 break;
-                // by passenger capacity min and max
-            case(5):
+            // by passenger capacity min and max
+            case (5):
                 System.out.println("Please, input minimal value and maximal value");
                 try {
                     printPlanes(SearchEngine.getPlanesByPassengerCapacity(controller.getPlanesList(),
                             inputIntWithFormatValidation(), inputIntWithFormatValidation()));
-                }catch (NoSuchElementException ex){
+                } catch (NoSuchElementException ex) {
                     System.out.println("No match found");
                 }
                 break;
         }
     }
+
     /**
      * Reads int value from console without any validation.
      *
@@ -251,8 +265,9 @@ public class Viewer {
         Scanner input = new Scanner(System.in);
         return input.nextInt();
     }
+
     /**
-     * Reads int value from console without any validation.
+     * Reads double value from console without any validation.
      *
      * @return (double) value
      */
@@ -260,36 +275,40 @@ public class Viewer {
         Scanner input = new Scanner(System.in);
         return input.nextDouble();
     }
-    /**Reads int value from console with validation on number format.
+
+    /**
+     * Reads int value from console with validation on number format.
      *
      * @return (int) value
      */
-    private int inputIntWithFormatValidation(){
+    private int inputIntWithFormatValidation() {
         int number;
         while (true) {
             try {
                 number = inputInt();
                 break;
             } catch (InputMismatchException ex) {
-                LOGGER.debug("Caught InputMismatchException."+ex.getMessage());
+                LOGGER.debug("Caught InputMismatchException." + ex.getMessage());
                 LOGGER.error("Failed to read number from console.");
                 System.out.println("Please, type an INTEGER number. You entered something else");
             }
         }
         return number;
     }
-    /**Reads int value from console with validation on number format.
+
+    /**
+     * Reads double value from console with validation on number format.
      *
      * @return (double) value
      */
-    private double inputDoubleWithFormatValidation(){
+    private double inputDoubleWithFormatValidation() {
         double number;
         while (true) {
             try {
                 number = inputDouble();
                 break;
             } catch (InputMismatchException ex) {
-                LOGGER.debug("Caught InputMismatchException."+ex.getMessage());
+                LOGGER.debug("Caught InputMismatchException." + ex.getMessage());
                 LOGGER.error("Failed to read number from console.");
                 System.out.println("Please, type an DOUBLE number (Type number inf format 43,95). You entered something else");
             }
@@ -314,7 +333,7 @@ public class Viewer {
             try {
                 number = inputInt();
             } catch (InputMismatchException ex) {
-                LOGGER.debug("Caught InputMismatchException."+ex.getMessage());
+                LOGGER.debug("Caught InputMismatchException." + ex.getMessage());
                 LOGGER.error("Failed to read number from console.");
                 System.out.println("Please, type an INTEGER number. You entered something else");
             }
@@ -341,7 +360,7 @@ public class Viewer {
                 try {
                     number = inputInt();
                 } catch (InputMismatchException ex) {
-                    LOGGER.debug("Caught InputMismatchException."+ex.getMessage());
+                    LOGGER.debug("Caught InputMismatchException." + ex.getMessage());
                     LOGGER.error("Failed to read number from console.");
                     System.out.println("Please, type an INTEGER number. You entered something else");
                 }
@@ -352,7 +371,7 @@ public class Viewer {
                 try {
                     number = inputInt();
                 } catch (InputMismatchException ex) {
-                    LOGGER.debug("Caught InputMismatchException."+ex.getMessage());
+                    LOGGER.debug("Caught InputMismatchException." + ex.getMessage());
                     LOGGER.error("Failed to read number from console.");
                     System.out.println("Please, type the number. You entered something else");
                 }
@@ -389,7 +408,7 @@ public class Viewer {
                 engineModelName = input.nextLine().toUpperCase();
                 return Engine.valueOf(engineModelName);
             } catch (IllegalArgumentException ex) {
-                LOGGER.debug("Caught IllegalArgumentException."+ex.getMessage());
+                LOGGER.debug("Caught IllegalArgumentException." + ex.getMessage());
                 LOGGER.error("Failed to get engine from console.");
                 System.out.println("No such engine found. Here's all available engines: ");
                 printEnginesList(controller.getEnginesList());
@@ -413,13 +432,14 @@ public class Viewer {
                     + "\nCode name: " + engine.getCodeName());
         }
     }
+
     /**
      * Print all planes in airline company to console.
      * <p>
      * Prints information about each plane in airline company to console.
      */
     public static void printPlanes(List<Plane> planes) {
-        if(planes.size()==0){
+        if (planes.size() == 0) {
             System.out.println("Airline company does not have any plane.");
             return;
         }
@@ -429,14 +449,15 @@ public class Viewer {
                     "\nSerial number: " + plane.getSerialNumber() +
                     "\nModel name: " + plane.getModelName() +
                     "\nFuel consumption: " + plane.getFuelConsumption() +
-                    "\nCrew: " + plane.getCrew() +
+                    "\nCrew: " + plane.getCrewSize() +
                     "\nPassenger capacity: " + plane.getPassengerCapacity()
-                    + "\nCargo capacity: " + plane.getCargoCapacity()+
+                    + "\nCargo capacity: " + plane.getCargoCapacity() +
                     "\n~~~~~~~~~~~~~~~~~~~~~~~~");
         }
     }
 
-    /**Prints information about given plane to console.
+    /**
+     * Prints information about given plane to console.
      *
      * @param plane plane, that will be printed to console.
      */
@@ -446,9 +467,9 @@ public class Viewer {
                 "\nSerial number: " + plane.getSerialNumber() +
                 "\nModel name: " + plane.getModelName() +
                 "\nFuel consumption: " + plane.getFuelConsumption() +
-                "\nCrew: " + plane.getCrew() +
+                "\nCrew: " + plane.getCrewSize() +
                 "\nPassenger capacity: " + plane.getPassengerCapacity()
-                + "\nCargo capacity: " + plane.getCargoCapacity()+
+                + "\nCargo capacity: " + plane.getCargoCapacity() +
                 "\n~~~~~~~~~~~~~~~~~~~~~~~~");
 
     }

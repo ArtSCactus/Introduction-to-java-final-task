@@ -33,7 +33,7 @@
         </RollingFile>
     </Appenders>
     <Loggers>
-        <Logger name="loggertest.Main" level="trace" additivity="false">
+        <Logger name="main.Main" level="trace" additivity="false">
             <AppenderRef ref="debugLogger" level="debug" />
             <AppenderRef ref="fileLogger" level="info" />
             <AppenderRef ref="errorLogger" level="error" />

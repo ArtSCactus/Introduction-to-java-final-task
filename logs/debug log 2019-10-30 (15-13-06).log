@@ -1,0 +1,2 @@
+2019-10-30 15:13:06.283 [main] DEBUG airline.view.Viewer - Caught InputMismatchException.null
+2019-10-30 15:13:06.289 [main] ERROR airline.view.Viewer - Failed to read number from console.

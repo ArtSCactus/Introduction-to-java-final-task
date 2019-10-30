@@ -11,7 +11,7 @@ public abstract class Plane {
     /**Amount of crew crew members for current plane.
      *
      */
-    private int crew;
+    private int crewSize;
     /**Name of this plane model.
      *
      */
@@ -21,12 +21,12 @@ public abstract class Plane {
      *
      * @param modelName - name of model
      * @param serialNumber - serial number
-     * @param crew - amount of crew members
+     * @param crewSize - amount of crew members
      */
-    public Plane(String modelName, int serialNumber, int crew) {
+    public Plane(String modelName, int serialNumber, int crewSize) {
         this.modelName = modelName;
         this.SERIAL_NUMBER = serialNumber;
-        this.crew = crew;
+        this.crewSize = crewSize;
     }
 
     /**
@@ -66,12 +66,12 @@ public abstract class Plane {
         return SERIAL_NUMBER;
     }
 
-    public int getCrew() {
-        return crew;
+    public int getCrewSize() {
+        return crewSize;
     }
 
-    public void setCrew(int crew) {
-        this.crew = crew;
+    public void setCrewSize(int crewSize) {
+        this.crewSize = crewSize;
     }
 
     public abstract int getPassengerCapacity();
